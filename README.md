@@ -15,7 +15,7 @@ npm start
 yarn start
 ```
 ## Road Map
-- [ ] Get screen on the application.
+- [X] Get screen on the application.
 - [ ] Take screenshot of the shared screen.
 - [ ] Save it with time and date as name of that screenshot.
 - [ ] *Try to save it without any popup, as it takes every two seconds, there will be a lot of popups.*

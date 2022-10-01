@@ -11,7 +11,7 @@ const infoButton = document.querySelector('#info')
 const stopCapture = document.querySelector('#stopCapture')
 
 infoButton.addEventListener('click', () => addFileDetails())
-stopCapture.addEventListener('click', () => stopCapturing())
+stopCapture.addEventListener('click', () => capture())
 
 async function startStream() {
     const constraints = {
@@ -41,18 +41,24 @@ async function capture() {
     const context = canvas.getContext("2d");
     try {
 
-        console.log(videoElement)
-        context.drawImage(videoElement, 0, 0, window.width, window.height);
-        let e;
-        const link = document.createElement('a')
-        const date = new Date()
-        const fileName = `screen_shot-${date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "-" + date.getHours() + date.getMinutes() + date.getSeconds()}`;
-        link.download = fileName;
-        fileDetails.set(fileName, `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`);
-        link.href = canvas.toDataURL('image/png')
-
-        e = new MouseEvent('click')
-        link.dispatchEvent(e);
+        console.log(videoElement.readyState)
+        if(videoElement.readyState >1){
+            const height = videoElement.videoHeight;
+            const width = videoElement.videoWidth;
+            canvas.height=height;
+            canvas.width=width;
+            context.drawImage(videoElement, 0, 0, width, height);
+            let e;
+            const link = document.createElement('a')
+            const date = new Date()
+            const fileName = `screen_shot-${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
+            link.download = fileName;
+            // fileDetails.set(fileName, `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`);
+            link.href = canvas.toDataURL('image/png')
+    
+            e = new MouseEvent('click')
+            link.dispatchEvent(e);
+        }
 
         // img.onload=()=>{
         //     canvas.width = img.width;
@@ -107,9 +113,9 @@ async function addFileDetails() {
 
 
 
-let startCap = setInterval(() => {
-    capture();
-}, 4000)
+// let startCap = setInterval(() => {
+//     capture();
+// }, 4000)
 
 function stopCapturing() {
     clearInterval(startCap);
@@ -117,6 +123,6 @@ function stopCapturing() {
 
 (async()=>{
     await startStream();
-    await startCap()
+    // await startCap()
 })();
 

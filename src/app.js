@@ -59,33 +59,6 @@ async function capture() {
             e = new MouseEvent('click')
             link.dispatchEvent(e);
         }
-
-        // img.onload=()=>{
-        //     canvas.width = img.width;
-        //     canvas.height = img.height;
-        //     setImaProperties({width:img.width,height:img.height});
-        //     ctx.drawImage(img,0,0, img.width,img.height);
-        //     canvas.removeAttribute('data-caman-id');
-        // };
-        // img.crossOrigin = 'Anonymous';
-        // img.src=url;
-
-        // stream.getTracks().forEach(track => track.stop());
-        // window.location.href = frame;
-        // const blob = new Blob(frame, {
-        //     type: 'image/png'
-        //   });
-
-        //   const buffer = Buffer.from(await blob.arrayBuffer());
-
-        //   const { filePath } = await dialog.showSaveDialog({
-        //     buttonLabel: 'Save video',
-        //     defaultPath: `vid-${Date.now()}.webm`
-        //   });
-
-        //   if (filePath) {
-        //     writeFile(filePath, buffer, () => console.log('video saved successfully!'));
-        //   }
     } catch (err) {
         console.error("Error: " + err);
     }

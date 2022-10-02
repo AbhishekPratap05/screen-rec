@@ -1,6 +1,12 @@
-const { desktopCapturer, remote } = require('electron');
-
 const fs = require('fs');
+const http = require('http');
+const path = require('path');
+
+// let appWindow = null;
+const appWindow = require(path.join(__dirname, 'window'));
+
+// const privateWindow = require(path.join(__dirname, 'index'));
+
 
 const fileDetails = new Map();
 
@@ -36,9 +42,26 @@ async function startStream() {
 
 }
 
+// app.on('ready',() => {
+//     app.on("activate", () => {
+//       if (appWindow == null) {
+//         appWindow  = require("./index.js");
+//       }
+//     });
+//   });
+
 async function capture() {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
+    // let browserWindow = appWindow.get();
+    
+    // console.log(ipcRenderer.sendSync ("show-message"));
+
+
+
+console.log(appWindow.get())
+console.log(privateWindow)
+
     try {
 
         console.log(videoElement.readyState)
@@ -56,12 +79,38 @@ async function capture() {
             // fileDetails.set(fileName, `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`);
             link.href = canvas.toDataURL('image/png')
     
-            e = new MouseEvent('click')
-            link.dispatchEvent(e);
+            // e = new MouseEvent('click')
+            // link.dispatchEvent(e);
+
+        // app.getPath("desktop")       // User's Desktop folder
+        // app.getPath("documents")     // User's "My Documents" folder
+        // app.getPath("downloads")     // User's Downloads folder
+
+        // const toLocalPath = path.resolve(app.getPath("desktop"), path.basename(link));
+
+        // const userChosenPath = dialog.showSaveDialog({ defaultPath: toLocalPath });
+
+        // if(userChosenPath){
+        //     download (remoteUrl, userChosenPath, myUrlSaveAsComplete)
+        // }
+            }
+        } catch (err) {
+            console.error("Error: " + err);
         }
-    } catch (err) {
-        console.error("Error: " + err);
-    }
+};
+
+
+function download (url, dest, cb) {
+    var file = fs.createWriteStream(dest);
+    var request = http.get(url, function(response) {
+        response.pipe(file);
+        file.on('finish', function() {
+            file.close(cb); // close() is async, call cb after close completes.
+        });
+    }).on('error', function(err) { // Handle errors
+        fs.unlink(dest); // Delete the file async. (But we don't check the result)
+        if (cb) cb(err.message);
+    });
 };
 
 async function addFileDetails() {

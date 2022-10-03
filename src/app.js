@@ -4,11 +4,9 @@ const util = require(path.join(__dirname, 'preload'));
 
 const videoElement = document.querySelector('video');
 
-const infoButton = document.querySelector('#info')
 
 const stopCapture = document.querySelector('#stopCapture')
 
-infoButton.addEventListener('click', () => addFileDetails())
 stopCapture.addEventListener('click', () => stopCapturing())
 
 async function startStream() {

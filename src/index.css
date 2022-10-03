@@ -12,9 +12,6 @@ body {
   background-color: #3d3d3d;
 }
 
-h1{
-  margin-left:2rem;
-}
 
 .btn {
   display: inline-block;
@@ -51,14 +48,16 @@ h1{
 
 .btn:disabled{
   box-shadow: inset 2px 2px 5px #000000, inset -3px -3px 7px #7c7a7a;
+  cursor:default;
 }
 
 .btn:disabled:hover{
   box-shadow: none;
+  cursor:default;
 }
 
-.btn-l-m8 {
-  margin-left:0.8rem;
+.btn-l-m4 {
+  margin-left:4rem;
 }
 
 .container {

@@ -27,4 +27,4 @@ yarn start
 - **Screenshots details will be saved in `screenshot_details.txt` file.**
 - **Screenshots will be saved after every 2 seconds.**
 
-**_All above details can be alterd in preload.js_**
+**_All above details can be altered in preload.js_**

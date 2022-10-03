@@ -54,16 +54,67 @@ async function capture() {
             const fileName = `screen_shot-${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
             link.download = fileName;
             // fileDetails.set(fileName, `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`);
-            link.href = canvas.toDataURL('image/png')
+            link.href = canvas.toDataURL('image/png');
+            let url =canvas.toDataURL('image/png');
+
+
+            const base64Data = url.replace(/^data:image\/png;base64,/, "");
+
+            fs.writeFile(fileName+'.png', base64Data, 'base64', (err) => {
+                    console.log(err);
+            });
+
+            // canvas.toBlob((blob) => {
+            //     const newImg = document.createElement('img');
+            //     url = URL.createObjectURL(blob);
+              
+            //     newImg.onload = () => {
+            //       // no longer need to read the blob so it's revoked
+            //       URL.revokeObjectURL(url);
+            //     };
+              
+            //     newImg.src = url;
+            //     console.log(newImg,url)
+            //     downloadScreenShot(url,fileName)
+            // })
     
-            e = new MouseEvent('click')
-            link.dispatchEvent(e);
+
+
+            // e = new MouseEvent('click')
+            // link.dispatchEvent(e);
+
         }
     } catch (err) {
         console.error("Error: " + err);
     }
 };
 
+// async function downloadScreenShot(url,fileName) {
+//     console.log(url)
+//     const lll = URL.createObjectURL(url)
+//     console.log(lll)
+//     await download(lll, `${__dirname}/screenshot/`);
+ 
+//     // fs.writeFileSync('dist/foo.jpg', await download('http://unicorn.com/foo.jpg'));
+ 
+//     // download('unicorn.com/foo.jpg').pipe(fs.createWriteStream('dist/foo.jpg'));
+ 
+//     // await Promise.all([
+//     //     'unicorn.com/foo.jpg',
+//     //     'cats.com/dancing.gif'
+//     // ].map(url => download(url, 'dist')));
+
+
+//     // https.get(url,(res) => {
+//     //         const path = `${__dirname}/screenshot/${fileName}`; 
+//     //         const filePath = fs.createWriteStream(path);
+//     //         res.pipe(filePath);
+//     //         filePath.on('finish',() => {
+//     //             filePath.close();
+//     //             console.log('Download Completed'); 
+//     //         })
+//     // });
+// }
 async function addFileDetails() {
     try {
 

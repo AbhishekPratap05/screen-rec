@@ -6,7 +6,8 @@ const {join}  = require('path')
 
 
 const SCREEN_SHOT_SAVE_FOLDER_NAME = './screenshot';
-const DOWNLOAD_DETAILS_FILE_NAME = 'details.txt'
+const DOWNLOAD_DETAILS_FILE_NAME = 'details.txt';
+const SCREENSHOT_INTERVAL= 2000;
 
 async function downloadImage(dataURL,filename){
     const base64Data = dataURL.replace(/^data:image\/png;base64,/, "");
@@ -36,4 +37,4 @@ async function addFileDetails(filename,fileDetails) {
     }
 };
 
-module.exports = {downloadImage,addFileDetails}
+module.exports = {downloadImage,addFileDetails,SCREENSHOT_INTERVAL}

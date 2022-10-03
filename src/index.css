@@ -49,6 +49,14 @@ h1{
   box-shadow: inset 2px 2px 5px #000000, inset -3px -3px 7px #7c7a7a;
 }
 
+.btn:disabled{
+  box-shadow: inset 2px 2px 5px #000000, inset -3px -3px 7px #7c7a7a;
+}
+
+.btn:disabled:hover{
+  box-shadow: none;
+}
+
 .btn-l-m8 {
   margin-left:0.8rem;
 }

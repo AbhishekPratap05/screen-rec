@@ -1,7 +1,6 @@
 const { desktopCapturer, remote } = require('electron');
-const fs = require('fs');
 const path = require('path')
-const download = require(path.join(__dirname, 'preload'));
+const util = require(path.join(__dirname, 'preload'));
 
 const videoElement = document.querySelector('video');
 
@@ -10,7 +9,7 @@ const infoButton = document.querySelector('#info')
 const stopCapture = document.querySelector('#stopCapture')
 
 infoButton.addEventListener('click', () => addFileDetails())
-stopCapture.addEventListener('click', () => capture())
+stopCapture.addEventListener('click', () => stopCapturing())
 
 async function startStream() {
     const constraints = {
@@ -47,28 +46,27 @@ async function capture() {
             const fileName = `screen_shot-${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
             const fileDetails = {fileName: `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`};
             let url =canvas.toDataURL('image/png');
-            download.downloadImage(url,fileName);
-            download.addFileDetails(fileName,fileDetails);
+            util.downloadImage(url,fileName);
+            util.addFileDetails(fileName,fileDetails);
         }
     } catch (err) {
         console.error("Error: " + err);
     }
 };
 
-
-
-
-
-// let startCap = setInterval(() => {
-//     capture();
-// }, 4000)
+let startCapIntervalInstance;
+function startCap(){
+    startCapIntervalInstance = setInterval(() => {
+    capture();
+}, util.SCREENSHOT_INTERVAL)} //takes screenshot after specified time
 
 function stopCapturing() {
-    clearInterval(startCap);
+    clearInterval(startCapIntervalInstance);
+    stopCapture.setAttribute('disabled',true)
 }
 
 (async()=>{
     await startStream();
-    // await startCap()
+    await startCap();
 })();
 

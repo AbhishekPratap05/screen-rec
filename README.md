@@ -20,3 +20,11 @@ yarn start
 - [X] Save it with time and date as name of that screenshot.
 - [X] *Try to save it without any popup, as it takes every two seconds, there will be a lot of popups.*
 - [X] Try to read/create file and append/write details about the file to it.
+
+
+## Notes
+- **Screenshots will be saved in `screenshot` folder.**
+- **Screenshots details will be saved in `screenshot_details.txt` file.**
+- **Screenshots will be saved after every 2 seconds.**
+
+**_All above details can be alterd in preload.js_**

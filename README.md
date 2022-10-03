@@ -18,5 +18,5 @@ yarn start
 - [X] Get screen on the application.
 - [X] Take screenshot of the shared screen.
 - [X] Save it with time and date as name of that screenshot.
-- [ ] *Try to save it without any popup, as it takes every two seconds, there will be a lot of popups.*
+- [X] *Try to save it without any popup, as it takes every two seconds, there will be a lot of popups.*
 - [ ] Try to read/create file and append/write details about the file to it.

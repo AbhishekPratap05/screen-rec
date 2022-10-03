@@ -19,4 +19,4 @@ yarn start
 - [X] Take screenshot of the shared screen.
 - [X] Save it with time and date as name of that screenshot.
 - [X] *Try to save it without any popup, as it takes every two seconds, there will be a lot of popups.*
-- [ ] Try to read/create file and append/write details about the file to it.
+- [X] Try to read/create file and append/write details about the file to it.

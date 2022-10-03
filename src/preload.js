@@ -6,7 +6,7 @@ const {join}  = require('path')
 
 
 const SCREEN_SHOT_SAVE_FOLDER_NAME = './screenshot';
-const DOWNLOAD_DETAILS_FILE_NAME = 'details.txt';
+const DOWNLOAD_DETAILS_FILE_NAME = 'screenshot_details.txt';
 const SCREENSHOT_INTERVAL= 2000;
 
 async function downloadImage(dataURL,filename){
@@ -19,19 +19,17 @@ async function downloadImage(dataURL,filename){
     });
 }
 
-async function addFileDetails(filename,fileDetails) {
+async function addFileDetails(fileDetails) {
     try {
-        // const details = new JSONObject(fileDetails)
-        console.log(filename,fileDetails);
-        // if (fs.existsSync(DOWNLOAD_DETAILS_FILE_NAME)) {
-        //     fs.appendFile(DOWNLOAD_DETAILS_FILE_NAME, JSON.stringify(details), function (err) {
-        //         if (err) throw err;
-        //     });
-        // } else {
-        //     fs.writeFile(DOWNLOAD_DETAILS_FILE_NAME, JSON.stringify(details), function (err) {
-        //         if (err) throw err;
-        //     });
-        // }
+        if (fs.existsSync(DOWNLOAD_DETAILS_FILE_NAME)) {
+            fs.appendFile(DOWNLOAD_DETAILS_FILE_NAME, `\n${JSON.stringify(fileDetails)}`, function (err) {
+                if (err) throw err;
+            });
+        } else {
+            fs.writeFile(DOWNLOAD_DETAILS_FILE_NAME, JSON.stringify(fileDetails), function (err) {
+                if (err) throw err;
+            });
+        }
     } catch (error) {
         console.error(`Got an error trying to read the file: ${error.message}`);
     }

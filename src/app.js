@@ -34,8 +34,6 @@ async function capture() {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     try {
-
-        console.log(videoElement.readyState)
         if(videoElement.readyState >1){
             const height = videoElement.videoHeight;
             const width = videoElement.videoWidth;
@@ -44,10 +42,13 @@ async function capture() {
             context.drawImage(videoElement, 0, 0, width, height);
             const date = new Date()
             const fileName = `screen_shot-${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
-            const fileDetails = {fileName: `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`};
+            const fileDetails = {
+                fileName: fileName,
+                creationDateTime:`${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`
+            };
             let url =canvas.toDataURL('image/png');
             util.downloadImage(url,fileName);
-            util.addFileDetails(fileName,fileDetails);
+            util.addFileDetails(fileDetails);
         }
     } catch (err) {
         console.error("Error: " + err);
@@ -58,7 +59,7 @@ let startCapIntervalInstance;
 function startCap(){
     startCapIntervalInstance = setInterval(() => {
     capture();
-}, util.SCREENSHOT_INTERVAL)} //takes screenshot after specified time
+}, util.SCREENSHOT_INTERVAL)} //takes screenshot after specified time mentioned in preload.js
 
 function stopCapturing() {
     clearInterval(startCapIntervalInstance);

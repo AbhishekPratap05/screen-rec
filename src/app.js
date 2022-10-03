@@ -44,7 +44,7 @@ async function capture() {
             const fileName = `screen_shot-${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
             const fileDetails = {
                 fileName: fileName,
-                creationDateTime:`${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}-${date.getHours()}${date.getMinutes()}${date.getSeconds()}`
+                creationDateTime:`Date: ${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()} Time:${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
             };
             let url =canvas.toDataURL('image/png');
             util.downloadImage(url,fileName);
